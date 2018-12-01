@@ -16,6 +16,22 @@ import java.io.InputStream;
 
 public class ImageHandler {
 
+    public static void preTreat(String inputImgFile, String outImgFile){
+        OpenCV.loadLocally();
+
+        Mat inImage = new Mat();
+        inImage = Imgcodecs.imread(inputImgFile);
+
+        if (inImage.empty()){
+            System.out.println("Error opening image");
+            System.exit(-1);
+        }
+
+        Mat outImage = new Mat();
+        Imgproc.GaussianBlur(inImage, outImage, new Size(5,5), 0,0);
+
+    }
+
 
     public static void preProcess(String originImageFile, String resImageFilePrefix){
         OpenCV.loadLocally();
